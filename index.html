@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人展示 | 简洁专业</title>
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #4a89dc;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: #2a6bc1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        /* 主内容区域 */
+        main {
+            margin-top: 80px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 80%;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #4a89dc;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #2a6bc1;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 关于我部分 */
+        .about {
+            background-color: #fff;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 2;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 技能部分 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .skill-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .skill-card h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        /* 项目部分 */
+        .projects {
+            background-color: #fff;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .project-image {
+            height: 200px;
+            background-color: #ddd;
+            overflow: hidden;
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        /* 联系部分 */
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .contact-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero, .about-content {
+                flex-direction: column;
+            }
+            
+            .hero-image, .about-image {
+                margin-top: 40px;
+            }
+            
+            .contact-methods {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">我的空间</div>
+                <ul class="nav-links">
+                    <li><a href="#about">关于我</a></li>
+                    <li><a href="#skills">技能</a></li>
+                    <li><a href="#projects">项目</a></li>
+                    <li><a href="#contact">联系我</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 英雄区域 -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>你好，我是<span style="color: #4a89dc;">张三</span></h1>
+                    <p class="subtitle">前端开发工程师 & UI设计师</p>
+                    <p>我致力于创建美观、实用且用户友好的数字体验。</p>
+                    <a href="#contact" class="btn" style="margin-top: 30px;">联系我</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我 -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2>关于我</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>我是一名充满激情的前端开发者和UI设计师，拥有5年行业经验。我热爱将创意转化为精美且功能强大的网站和应用程序。</p>
+                        <p>我的工作哲学是注重细节、用户体验和简洁的设计。我相信好的设计不仅应该看起来漂亮，更应该提供无缝的用户体验。</p>
+                        <p>当我不编码时，我喜欢摄影、阅读和探索新的技术趋势。我也喜欢参加技术会议和研讨会，与志同道合的人交流想法。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技能 -->
+        <section id="skills" class="skills">
+            <div class="container">
+                <h2>我的技能</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h3>前端开发</h3>
+                        <p>HTML5, CSS3, JavaScript, React, Vue.js, Responsive Design</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>UI/UX 设计</h3>
+                        <p>用户研究, 线框图, 原型设计, Figma, Adobe XD</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>其他技能</h3>
+                        <p>Git, Webpack, Node.js, PHP, Python</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 项目 -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2>精选项目</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-image"></div>
+                        <div class="project-info">
+                            <h3>电子商务网站</h3>
+                            <p>一个全功能的电子商务平台，具有购物车、支付集成和用户仪表板。</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image"></div>
+                        <div class="project-info">
+                            <h3>健康应用</h3>
+                            <p>一款帮助用户跟踪健康和健身目标的移动应用程序。</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image"></div>
+                        <div class="project-info">
+                            <h3>企业仪表板</h3>
+                            <p>为企业设计的分析仪表板，可视化关键业务指标。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系 -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>联系我</h2>
+                <div class="contact-methods">
+                    <div class="contact-card">
+                        <h3>邮箱</h3>
+                        <p>example@email.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>社交媒体</h3>
+                        <p>LinkedIn / Twitter / GitHub</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>电话</h3>
+                        <p>+86 123 4567 8901</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+            <p>&copy; 2023 张三. 保留所有权利。</p>
+        </div>
+    </footer>
+</body>
+</html>
