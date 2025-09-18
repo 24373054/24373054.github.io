@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人展示 | 简洁专业</title>
+    <title>杨卓的个人简历</title>
     <style>
         /* 基础样式重置 */
         * {
@@ -87,17 +87,6 @@
             flex: 1;
         }
         
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .hero-image img {
-            max-width: 80%;
-            border-radius: 50%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
         h1 {
             font-size: 3rem;
             margin-bottom: 20px;
@@ -140,23 +129,29 @@
         
         .about-content {
             display: flex;
-            align-items: center;
-            gap: 50px;
+            flex-direction: column;
+            gap: 20px;
         }
         
-        .about-text {
-            flex: 2;
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
         }
         
-        .about-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .about-image img {
-            max-width: 100%;
+        .info-card {
+            background-color: #f8f9fa;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-card h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            border-bottom: 2px solid #4a89dc;
+            padding-bottom: 10px;
         }
         
         /* 技能部分 */
@@ -200,12 +195,11 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
         }
         
-        .project-image {
-            height: 200px;
-            background-color: #ddd;
-            overflow: hidden;
+        .project-card:hover {
+            transform: translateY(-10px);
         }
         
         .project-info {
@@ -215,6 +209,21 @@
         .project-info h3 {
             margin-bottom: 10px;
             color: #2c3e50;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        
+        .tech-tag {
+            background-color: #4a89dc;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
         }
         
         /* 联系部分 */
@@ -258,12 +267,8 @@
         
         /* 响应式设计 */
         @media (max-width: 768px) {
-            .hero, .about-content {
+            .hero {
                 flex-direction: column;
-            }
-            
-            .hero-image, .about-image {
-                margin-top: 40px;
             }
             
             .contact-methods {
@@ -285,7 +290,7 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">我的空间</div>
+                <div class="logo">杨卓的简历</div>
                 <ul class="nav-links">
                     <li><a href="#about">关于我</a></li>
                     <li><a href="#skills">技能</a></li>
@@ -301,9 +306,9 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1>你好，我是<span style="color: #4a89dc;">张三</span></h1>
-                    <p class="subtitle">前端开发工程师 & UI设计师</p>
-                    <p>我致力于创建美观、实用且用户友好的数字体验。</p>
+                    <h1>你好，我是<span style="color: #4a89dc;">杨卓</span></h1>
+                    <p class="subtitle">北京航空航天大学 软件工程专业</p>
+                    <p>热爱前端开发与创新技术探索，致力于打造优秀的用户体验。</p>
                     <a href="#contact" class="btn" style="margin-top: 30px;">联系我</a>
                 </div>
             </div>
@@ -314,10 +319,28 @@
             <div class="container">
                 <h2>关于我</h2>
                 <div class="about-content">
-                    <div class="about-text">
-                        <p>我是一名充满激情的前端开发者和UI设计师，拥有5年行业经验。我热爱将创意转化为精美且功能强大的网站和应用程序。</p>
-                        <p>我的工作哲学是注重细节、用户体验和简洁的设计。我相信好的设计不仅应该看起来漂亮，更应该提供无缝的用户体验。</p>
-                        <p>当我不编码时，我喜欢摄影、阅读和探索新的技术趋势。我也喜欢参加技术会议和研讨会，与志同道合的人交流想法。</p>
+                    <p>我是北京航空航天大学软件工程专业的学生，对前端开发和新兴技术有浓厚兴趣。喜欢挑战自己，不断学习新技术并将其应用于实际项目中。</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>基本信息</h3>
+                            <p><strong>姓名：</strong>杨卓</p>
+                            <p><strong>年龄：</strong>20岁 (2005年2月)</p>
+                            <p><strong>电话：</strong>19971403020</p>
+                            <p><strong>邮箱：</strong>2315766973@qq.com</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>教育背景</h3>
+                            <p><strong>学校：</strong>北京航空航天大学</p>
+                            <p><strong>专业：</strong>软件工程</p>
+                            <p><strong>状态：</strong>在读</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>荣誉奖项</h3>
+                            <p>冯如杯创意赛道二等奖</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -329,16 +352,20 @@
                 <h2>我的技能</h2>
                 <div class="skills-grid">
                     <div class="skill-card">
-                        <h3>前端开发</h3>
-                        <p>HTML5, CSS3, JavaScript, React, Vue.js, Responsive Design</p>
+                        <h3>编程语言</h3>
+                        <p>C语言、JavaScript、Python、HTML5、CSS3</p>
                     </div>
                     <div class="skill-card">
-                        <h3>UI/UX 设计</h3>
-                        <p>用户研究, 线框图, 原型设计, Figma, Adobe XD</p>
+                        <h3>前端技术</h3>
+                        <p>React、Vue.js、响应式设计、前端工程化</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>后端技术</h3>
+                        <p>Node.js、Flask、SQL数据库、RESTful API</p>
                     </div>
                     <div class="skill-card">
                         <h3>其他技能</h3>
-                        <p>Git, Webpack, Node.js, PHP, Python</p>
+                        <p>Git版本控制、AI技术应用、项目部署</p>
                     </div>
                 </div>
             </div>
@@ -347,27 +374,100 @@
         <!-- 项目 -->
         <section id="projects" class="projects">
             <div class="container">
-                <h2>精选项目</h2>
+                <h2>项目经历</h2>
                 <div class="project-grid">
                     <div class="project-card">
-                        <div class="project-image"></div>
                         <div class="project-info">
-                            <h3>电子商务网站</h3>
-                            <p>一个全功能的电子商务平台，具有购物车、支付集成和用户仪表板。</p>
+                            <h3>校史馆展示平台 (2024.9-2024.12)</h3>
+                            <div class="tech-stack">
+                                <span class="tech-tag">HTML/CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">React</span>
+                            </div>
+                            <p>为学校设计的校史馆在线展示平台，提供虚拟游览和历史资料查询功能。</p>
+                            <p><strong>成果：</strong>获得走进软件课程优秀奖</p>
+                            <p><strong>亮点：</strong>交互式时间轴设计，响应式布局适配多设备</p>
                         </div>
                     </div>
+                    
                     <div class="project-card">
-                        <div class="project-image"></div>
                         <div class="project-info">
-                            <h3>健康应用</h3>
-                            <p>一款帮助用户跟踪健康和健身目标的移动应用程序。</p>
+                            <h3>论文图片生成AI助手 (2024.11-2025.1)</h3>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Flask</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">AI API</span>
+                            </div>
+                            <p>基于AI技术的论文图表生成工具，帮助研究人员快速创建专业图表。</p>
+                            <p><strong>技术：</strong>调用DS的API实现智能图表生成</p>
+                            <p><strong>亮点：</strong>简化科研工作流程，提高图表制作效率</p>
                         </div>
                     </div>
+                    
                     <div class="project-card">
-                        <div class="project-image"></div>
                         <div class="project-info">
-                            <h3>企业仪表板</h3>
-                            <p>为企业设计的分析仪表板，可视化关键业务指标。</p>
+                            <h3>树洞网站 (2024.12-2025.2)</h3>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Flask</span>
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag">JavaScript</span>
+                            </div>
+                            <p>匿名社交平台，用户可发帖、评论、加好友和实时聊天。</p>
+                            <p><strong>功能：</strong>SQL数据库管理，实时聊天系统，好友关系管理</p>
+                            <p><strong>亮点：</strong>注重用户隐私保护，简洁易用的界面设计</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-info">
+                            <h3>购物网站 (2025.2-2025.3)</h3>
+                            <div class="tech-stack">
+                                <span class="tech-tag">前端技术</span>
+                                <span class="tech-tag">支付集成</span>
+                            </div>
+                            <p>全功能电子商务平台，集成支付系统，提供完整的购物体验。</p>
+                            <p><strong>特点：</strong>安全的支付处理，用户友好的购物流程</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-info">
+                            <h3>邮件发送系统桌面软件 (2025.5-2025.7)</h3>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">数据库</span>
+                                <span class="tech-tag">EXE打包</span>
+                            </div>
+                            <p>智能化邮件管理软件，支持群发、定时发送和邮件模板管理。</p>
+                            <p><strong>功能：</strong>数据库管理，智能化发送策略，EXE打包分发</p>
+                            <p><strong>亮点：</strong>提高邮件营销效率，易于部署使用</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-info">
+                            <h3>加密云盘 (2025.6-2025.8)</h3>
+                            <div class="tech-stack">
+                                <span class="tech-tag">加密技术</span>
+                                <span class="tech-tag">云存储</span>
+                            </div>
+                            <p>安全可靠的云存储解决方案，提供端到端加密保护用户文件隐私。</p>
+                            <p><strong>特点：</strong>高强度加密算法，简洁的文件管理界面</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-info">
+                            <h3>区块链加密货币交易所 (2025.9-至今)</h3>
+                            <div class="tech-stack">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">区块链</span>
+                                <span class="tech-tag">API集成</span>
+                                <span class="tech-tag">AI技术</span>
+                            </div>
+                            <p>基于区块链技术的加密货币交易平台，集成钱包功能和AI市场分析。</p>
+                            <p><strong>功能：</strong>API集成多种加密货币，智能钱包系统，AI市场预测</p>
+                            <p><strong>亮点：</strong>创新的AI辅助交易功能，高安全性设计</p>
                         </div>
                     </div>
                 </div>
@@ -381,15 +481,11 @@
                 <div class="contact-methods">
                     <div class="contact-card">
                         <h3>邮箱</h3>
-                        <p>example@email.com</p>
-                    </div>
-                    <div class="contact-card">
-                        <h3>社交媒体</h3>
-                        <p>LinkedIn / Twitter / GitHub</p>
+                        <p>2315766973@qq.com</p>
                     </div>
                     <div class="contact-card">
                         <h3>电话</h3>
-                        <p>+86 123 4567 8901</p>
+                        <p>19971403020</p>
                     </div>
                 </div>
             </div>
@@ -399,13 +495,7 @@
     <!-- 页脚 -->
     <footer>
         <div class="container">
-            <div class="social-links">
-                <a href="#">LinkedIn</a>
-                <a href="#">GitHub</a>
-                <a href="#">Twitter</a>
-                <a href="#">Instagram</a>
-            </div>
-            <p>&copy; 2023 张三. 保留所有权利。</p>
+            <p>&copy; 2025 杨卓. 保留所有权利。</p>
         </div>
     </footer>
 </body>
