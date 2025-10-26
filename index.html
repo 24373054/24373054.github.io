@@ -3,302 +3,729 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>杨卓的个人简历</title>
+    <title>杨卓 - 个人学术主页 | Yang Zhuo - Academic Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* 基础样式重置 */
+        /* ==================== 基础样式重置 ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        :root {
+            --primary-color: #475569;
+            --secondary-color: #64748b;
+            --accent-color: #94a3b8;
+            --text-primary: #334155;
+            --text-secondary: #64748b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --bg-card: #f1f5f9;
+            --border-color: #cbd5e1;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* 暗色主题 */
+        body.dark-theme {
+            --primary-color: #94a3b8;
+            --secondary-color: #64748b;
+            --accent-color: #475569;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --bg-card: #1e293b;
+            --border-color: #334155;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* 系统偏好暗色主题时自动应用 */
+        @media (prefers-color-scheme: dark) {
+            body:not(.light-theme) {
+                --primary-color: #94a3b8;
+                --secondary-color: #64748b;
+                --accent-color: #475569;
+                --text-primary: #e2e8f0;
+                --text-secondary: #94a3b8;
+                --bg-primary: #0f172a;
+                --bg-secondary: #1e293b;
+                --bg-tertiary: #334155;
+                --bg-card: #1e293b;
+                --border-color: #334155;
+                --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+                --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+                --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
+                --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5);
+            }
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+            overflow-x: hidden;
         }
         
-        a {
-            text-decoration: none;
-            color: #4a89dc;
-            transition: color 0.3s ease;
-        }
-        
-        a:hover {
-            color: #2a6bc1;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* 导航栏 */
+        /* ==================== 导航栏 ==================== */
         header {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--bg-primary);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        header.scrolled {
+            box-shadow: var(--shadow-md);
         }
         
         nav {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
         
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #333;
+            color: var(--text-primary);
         }
         
         .nav-links {
             display: flex;
             list-style: none;
+            gap: 2rem;
         }
         
-        .nav-links li {
-            margin-left: 30px;
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
         }
         
-        /* 主内容区域 */
-        main {
-            margin-top: 80px;
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        /* 导航栏右侧按钮组 */
+        .nav-right {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        /* 主题切换按钮 */
+        .theme-toggle,
+        .lang-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .theme-toggle:hover,
+        .lang-toggle:hover {
+            background: var(--bg-tertiary);
+            transform: translateY(-2px);
+        }
+        
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-primary);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .sun-icon {
+            fill: none;
+        }
+        
+        .moon-icon {
+            fill: var(--text-primary);
+            stroke: none;
+        }
+        
+        .theme-icon {
+            display: none;
+        }
+        
+        .theme-icon.active {
+            display: block;
+        }
+        
+        /* ==================== 通用容器 ==================== */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
         
         section {
-            padding: 80px 0;
+            padding: 6rem 0;
         }
         
-        /* 英雄区域 */
+        /* ==================== 英雄区域 ==================== */
         .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            min-height: 80vh;
+            position: relative;
+            background: var(--bg-primary);
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
         }
         
         .hero-content {
-            flex: 1;
+            position: relative;
+            z-index: 1;
         }
         
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #2c3e50;
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+            font-family: 'Noto Serif SC', serif;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
         
-        .subtitle {
+        .hero .subtitle {
             font-size: 1.5rem;
-            color: #7f8c8d;
-            margin-bottom: 30px;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            font-weight: 400;
+        }
+        
+        .hero .description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            max-width: 600px;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
         
         .btn {
             display: inline-block;
-            background-color: #4a89dc;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            padding: 0.875rem 2rem;
+            border-radius: 0;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
         }
         
-        .btn:hover {
-            background-color: #2a6bc1;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .btn-primary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
         }
         
-        /* 关于我部分 */
-        .about {
-            background-color: #fff;
+        .btn-primary:hover {
+            background: var(--bg-tertiary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
         
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-2px);
+        }
+        
+        /* ==================== 标题样式 ==================== */
+        .section-title {
             text-align: center;
-            color: #2c3e50;
+            margin-bottom: 4rem;
         }
         
-        .about-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .section-title .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 1rem auto;
+            border-radius: 0;
+        }
+        
+        /* ==================== 关于我 ==================== */
+        .about {
+            background: var(--bg-primary);
+        }
+        
+        .about-intro {
+            text-align: center;
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
         }
         
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
         
         .info-card {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 0;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
         }
         
         .info-card h3 {
-            margin-bottom: 15px;
-            color: #2c3e50;
-            border-bottom: 2px solid #4a89dc;
-            padding-bottom: 10px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        /* 技能部分 */
+        .info-card h3::before {
+            content: '●';
+            color: var(--accent-color);
+        }
+        
+        .info-card p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+        
+        .info-card strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        /* ==================== 技能部分 ==================== */
+        .skills {
+            background: var(--bg-secondary);
+        }
+        
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
         
         .skill-card {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 0;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            border-left: 3px solid transparent;
         }
         
         .skill-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-left-color: var(--primary-color);
         }
         
         .skill-card h3 {
-            margin-bottom: 15px;
-            color: #2c3e50;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
         
-        /* 项目部分 */
+        .skill-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        /* ==================== 项目部分 ==================== */
         .projects {
-            background-color: #fff;
+            background: var(--bg-primary);
         }
         
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
         
         .project-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
+            background: var(--bg-card);
+            border-radius: 0;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
         }
         
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+        
+        .project-header {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .project-header h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .project-header small {
+            color: var(--text-secondary);
         }
         
         .project-info {
-            padding: 20px;
+            padding: 1.5rem;
         }
         
-        .project-info h3 {
-            margin-bottom: 10px;
-            color: #2c3e50;
+        .project-info p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .project-info strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            gap: 0.75rem;
+            color: var(--text-primary);
         }
         
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin: 10px 0;
+            gap: 0.5rem;
+            margin: 1rem 0;
         }
         
         .tech-tag {
-            background-color: #4a89dc;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 0.375rem 0.875rem;
+            border-radius: 0;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
         }
         
-        /* 联系部分 */
+        /* ==================== 联系部分 ==================== */
+        .contact {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+        }
+        
         .contact-methods {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
         }
         
         .contact-card {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: 0;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
         }
         
         .contact-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
         }
         
-        /* 页脚 */
+        .contact-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .contact-card p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .contact-card a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-card a:hover {
+            color: var(--text-primary);
+        }
+        
+        /* ==================== 页脚 ==================== */
         footer {
-            background-color: #2c3e50;
-            color: #fff;
-            padding: 40px 0;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 3rem 0;
             text-align: center;
+            border-top: 1px solid var(--border-color);
         }
         
-        .social-links {
-            margin-bottom: 20px;
+        footer p {
+            margin-bottom: 0.5rem;
         }
         
-        .social-links a {
-            color: #fff;
-            margin: 0 10px;
-            font-size: 1.2rem;
+        .beian-info {
+            margin-top: 1rem;
+            font-size: 0.875rem;
         }
         
-        /* 响应式设计 */
+        .beian-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .beian-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .beian-icon {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+        }
+        
+        /* ==================== 动画 ==================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* ==================== 响应式设计 ==================== */
         @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-            }
-            
-            .contact-methods {
-                flex-direction: column;
-            }
-            
-            h1 {
+            .hero h1 {
                 font-size: 2.5rem;
             }
             
-            h2 {
+            .hero .subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .section-title h2 {
                 font-size: 2rem;
             }
+            
+            .nav-left {
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .theme-toggle,
+            .lang-toggle {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .nav-right {
+                gap: 0.25rem;
+            }
+        }
+        
+        /* ==================== 滚动条美化 ==================== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 0;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
         }
     </style>
 </head>
 <body>
     <!-- 导航栏 -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">杨卓的简历</div>
+    <header id="header">
+        <nav class="container">
+            <div class="nav-left">
+                <div class="logo" data-zh="杨卓" data-en="Yang Zhuo">杨卓</div>
                 <ul class="nav-links">
-                    <li><a href="#about">关于我</a></li>
-                    <li><a href="#skills">技能</a></li>
-                    <li><a href="#projects">项目</a></li>
-                    <li><a href="#contact">联系我</a></li>
+                    <li><a href="#about" data-zh="关于" data-en="About">关于</a></li>
+                    <li><a href="#skills" data-zh="技能" data-en="Skills">技能</a></li>
+                    <li><a href="#projects" data-zh="项目" data-en="Projects">项目</a></li>
+                    <li><a href="#contact" data-zh="联系" data-en="Contact">联系</a></li>
                 </ul>
-            </nav>
-        </div>
+            </div>
+            <div class="nav-right">
+                <button class="lang-toggle" id="langToggle" aria-label="切换语言">
+                    <span id="langText">EN</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                <!-- 太阳图标 (亮色模式) -->
+                <svg class="theme-icon sun-icon active" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <!-- 月亮图标 (暗色模式) -->
+                <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            </div>
+        </nav>
     </header>
 
     <main>
@@ -306,10 +733,13 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1>你好，我是<span style="color: #4a89dc;">杨卓</span></h1>
-                    <p class="subtitle">北京航空航天大学 软件工程专业</p>
-                    <p>热爱前端开发与创新技术探索，致力于打造优秀的用户体验。</p>
-                    <a href="#contact" class="btn" style="margin-top: 30px;">联系我</a>
+                    <h1 data-zh="你好，我是杨卓" data-en="Hello, I'm Yang Zhuo">你好，我是杨卓</h1>
+                    <p class="subtitle" data-zh="北京航空航天大学 | 软件工程专业" data-en="Beihang University | Software Engineering">北京航空航天大学 | 软件工程专业</p>
+                    <p class="description" data-zh="热爱前端开发与创新技术探索，Web3 & AI 践行者，致力于打造优秀的用户体验和前沿技术应用。" data-en="Passionate about frontend development and innovative technology exploration. Web3 & AI practitioner, dedicated to creating excellent user experiences and cutting-edge applications.">热爱前端开发与创新技术探索，Web3 & AI 践行者，致力于打造优秀的用户体验和前沿技术应用。</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary" data-zh="查看项目" data-en="View Projects">查看项目</a>
+                        <a href="#contact" class="btn btn-secondary" data-zh="联系我" data-en="Contact Me">联系我</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -317,30 +747,33 @@
         <!-- 关于我 -->
         <section id="about" class="about">
             <div class="container">
-                <h2>关于我</h2>
-                <div class="about-content">
-                    <p>我是北京航空航天大学软件工程专业的学生，对前端开发和新兴技术有浓厚兴趣。喜欢挑战自己，不断学习新技术并将其应用于实际项目中。</p>
+                <div class="section-title">
+                    <h2 data-zh="关于我" data-en="About Me">关于我</h2>
+                    <p class="subtitle" data-zh="About Me" data-en="About Me">About Me</p>
+                </div>
+                <p class="about-intro" data-zh="我是北京航空航天大学软件工程专业的学生，对前端开发和新兴技术有浓厚兴趣。喜欢挑战自己，不断学习新技术并将其应用于实际项目中。作为刻熵团队的成员，我积极参与Web3和AI领域的创新项目开发。" data-en="I'm a software engineering student at Beihang University with a passion for frontend development and emerging technologies. I love challenging myself and continuously learning new technologies to apply them to real projects. As a member of the Keshan Team, I actively participate in innovative project development in the Web3 and AI fields.">我是北京航空航天大学软件工程专业的学生，对前端开发和新兴技术有浓厚兴趣。喜欢挑战自己，不断学习新技术并将其应用于实际项目中。作为刻熵团队的成员，我积极参与Web3和AI领域的创新项目开发。</p>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3 data-zh="基本信息" data-en="Basic Info">基本信息</h3>
+                        <p><strong data-zh="姓名：" data-en="Name: ">姓名：</strong>杨卓 (Yang Zhuo)</p>
+                        <p><strong data-zh="年龄：" data-en="Age: ">年龄：</strong><span data-zh="20岁 (2005年2月)" data-en="20 (Born in Feb 2005)">20岁 (2005年2月)</span></p>
+                        <p><strong data-zh="电话：" data-en="Phone: ">电话：</strong>19971403020</p>
+                        <p><strong data-zh="邮箱：" data-en="Email: ">邮箱：</strong>2315766973@qq.com</p>
+                    </div>
                     
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <h3>基本信息</h3>
-                            <p><strong>姓名：</strong>杨卓</p>
-                            <p><strong>年龄：</strong>20岁 (2005年2月)</p>
-                            <p><strong>电话：</strong>19971403020</p>
-                            <p><strong>邮箱：</strong>2315766973@qq.com</p>
-                        </div>
-                        
-                        <div class="info-card">
-                            <h3>教育背景</h3>
-                            <p><strong>学校：</strong>北京航空航天大学</p>
-                            <p><strong>专业：</strong>软件工程</p>
-                            <p><strong>状态：</strong>在读</p>
-                        </div>
-                        
-                        <div class="info-card">
-                            <h3>荣誉奖项</h3>
-                            <p>冯如杯创意赛道二等奖</p>
-                        </div>
+                    <div class="info-card">
+                        <h3 data-zh="教育背景" data-en="Education">教育背景</h3>
+                        <p><strong data-zh="学校：" data-en="University: ">学校：</strong><span data-zh="北京航空航天大学" data-en="Beihang University">北京航空航天大学</span></p>
+                        <p><strong data-zh="专业：" data-en="Major: ">专业：</strong><span data-zh="软件工程" data-en="Software Engineering">软件工程</span></p>
+                        <p><strong data-zh="状态：" data-en="Status: ">状态：</strong><span data-zh="在读" data-en="Enrolled">在读</span></p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3 data-zh="团队与研究" data-en="Team & Research">团队与研究</h3>
+                        <p><strong data-zh="团队：" data-en="Team: ">团队：</strong><span data-zh="刻熵团队 (Keshan Team)" data-en="Keshan Team">刻熵团队 (Keshan Team)</span></p>
+                        <p><strong data-zh="实验室：" data-en="Lab: ">实验室：</strong>Matrix Lab</p>
+                        <p><strong data-zh="方向：" data-en="Focus: ">方向：</strong>Web3 & AI <span data-zh="技术创新" data-en="Innovation">技术创新</span></p>
                     </div>
                 </div>
             </div>
@@ -349,39 +782,42 @@
         <!-- 技能 -->
         <section id="skills" class="skills">
             <div class="container">
-                <h2>我的技能</h2>
+                <div class="section-title">
+                    <h2 data-zh="技能专长" data-en="Technical Skills">技能专长</h2>
+                    <p class="subtitle" data-zh="Technical Skills" data-en="Technical Skills">Technical Skills</p>
+                </div>
                 <div class="skills-grid">
                     <div class="skill-card">
-                        <h3>编程语言</h3>
-                        <p>C语言、JavaScript、Python、Solidity、HTML5、CSS3、TypeScript</p>
+                        <h3 data-zh="📝 编程语言" data-en="📝 Programming Languages">📝 编程语言</h3>
+                        <p data-zh="C语言、JavaScript、Python、Solidity、HTML5、CSS3、TypeScript" data-en="C, JavaScript, Python, Solidity, HTML5, CSS3, TypeScript">C语言、JavaScript、Python、Solidity、HTML5、CSS3、TypeScript</p>
                     </div>
                     <div class="skill-card">
-                        <h3>前端技术</h3>
-                        <p>React、Vue.js、响应式设计、前端工程化、Web3.js、Ethers.js</p>
+                        <h3 data-zh="🎨 前端技术" data-en="🎨 Frontend Technologies">🎨 前端技术</h3>
+                        <p data-zh="React、Vue.js、响应式设计、前端工程化、Web3.js、Ethers.js" data-en="React, Vue.js, Responsive Design, Frontend Engineering, Web3.js, Ethers.js">React、Vue.js、响应式设计、前端工程化、Web3.js、Ethers.js</p>
                     </div>
                     <div class="skill-card">
-                        <h3>区块链与Web3技术</h3>
-                        <p>智能合约开发、ERC20/ERC721代币标准、代币部署与管理、DeFi协议、NFT合约、DAO治理、ZKML、EIP712签名、流动性管理</p>
+                        <h3 data-zh="⛓️ 区块链与Web3" data-en="⛓️ Blockchain & Web3">⛓️ 区块链与Web3</h3>
+                        <p data-zh="智能合约开发、ERC20/ERC721代币标准、代币部署与管理、DeFi协议、NFT合约、DAO治理、ZKML、EIP712签名、流动性管理" data-en="Smart Contract Development, ERC20/ERC721 Standards, Token Deployment, DeFi Protocols, NFT Contracts, DAO Governance, ZKML, EIP712 Signatures, Liquidity Management">智能合约开发、ERC20/ERC721代币标准、代币部署与管理、DeFi协议、NFT合约、DAO治理、ZKML、EIP712签名、流动性管理</p>
                     </div>
                     <div class="skill-card">
-                        <h3>AI与机器学习</h3>
-                        <p>大模型微调、提示工程、RAG（检索增强生成）、情绪分析、AI-NPC交互系统、ZKML（零知识机器学习）</p>
+                        <h3 data-zh="🤖 AI与机器学习" data-en="🤖 AI & Machine Learning">🤖 AI与机器学习</h3>
+                        <p data-zh="大模型微调、提示工程、RAG（检索增强生成）、情绪分析、AI-NPC交互系统、ZKML（零知识机器学习）" data-en="LLM Fine-tuning, Prompt Engineering, RAG (Retrieval-Augmented Generation), Sentiment Analysis, AI-NPC Systems, ZKML">大模型微调、提示工程、RAG（检索增强生成）、情绪分析、AI-NPC交互系统、ZKML（零知识机器学习）</p>
                     </div>
                     <div class="skill-card">
-                        <h3>后端与数据库</h3>
-                        <p>Node.js、Flask、SQL数据库、RESTful API、API集成与开发</p>
+                        <h3 data-zh="⚙️ 后端与数据库" data-en="⚙️ Backend & Database">⚙️ 后端与数据库</h3>
+                        <p data-zh="Node.js、Flask、SQL数据库、RESTful API、API集成与开发" data-en="Node.js, Flask, SQL Database, RESTful API, API Integration & Development">Node.js、Flask、SQL数据库、RESTful API、API集成与开发</p>
                     </div>
                     <div class="skill-card">
-                        <h3>金融科技</h3>
-                        <p>量化交易策略、因子分析、回测系统、风险检测、情绪分析、加密货币交易</p>
+                        <h3 data-zh="💰 金融科技" data-en="💰 FinTech">💰 金融科技</h3>
+                        <p data-zh="量化交易策略、因子分析、回测系统、风险检测、情绪分析、加密货币交易" data-en="Quantitative Trading Strategies, Factor Analysis, Backtesting Systems, Risk Detection, Sentiment Analysis, Cryptocurrency Trading">量化交易策略、因子分析、回测系统、风险检测、情绪分析、加密货币交易</p>
                     </div>
                     <div class="skill-card">
-                        <h3>Web3游戏开发</h3>
-                        <p>全链游戏架构、钱包支付集成、链上资产管理、游戏经济模型设计</p>
+                        <h3 data-zh="🎮 Web3游戏开发" data-en="🎮 Web3 Game Development">🎮 Web3游戏开发</h3>
+                        <p data-zh="全链游戏架构、钱包支付集成、链上资产管理、游戏经济模型设计" data-en="Fully On-Chain Game Architecture, Wallet Payment Integration, On-Chain Asset Management, Game Economic Model Design">全链游戏架构、钱包支付集成、链上资产管理、游戏经济模型设计</p>
                     </div>
                     <div class="skill-card">
-                        <h3>开发工具与部署</h3>
-                        <p>Git版本控制、项目部署、Jekyll、云服务部署、加密技术</p>
+                        <h3 data-zh="🛠️ 开发工具" data-en="🛠️ Development Tools">🛠️ 开发工具</h3>
+                        <p data-zh="Git版本控制、项目部署、Jekyll、云服务部署、加密技术" data-en="Git Version Control, Project Deployment, Jekyll, Cloud Service Deployment, Encryption Technology">Git版本控制、项目部署、Jekyll、云服务部署、加密技术</p>
                     </div>
                 </div>
             </div>
@@ -390,11 +826,19 @@
         <!-- 项目 -->
         <section id="projects" class="projects">
             <div class="container">
-                <h2>项目经历</h2>
+                <div class="section-title">
+                    <h2 data-zh="项目经历" data-en="Project Experience">项目经历</h2>
+                    <p class="subtitle" data-zh="Project Experience" data-en="Project Experience">Project Experience</p>
+                </div>
                 <div class="project-grid">
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="瀛州纪：AI驱动全链Web3游戏" data-en="Yingzhou Ji: AI-Powered Fully On-Chain Web3 Game">瀛州纪：AI驱动全链Web3游戏</h3>
+                            <small data-zh="2025.10 - 至今" data-en="Oct 2025 - Present">2025.10 - 至今</small>
+                        </div>
                         <div class="project-info">
-                            <h3>瀛州纪：AI驱动全链Web3游戏 (2025.10-至今)</h3>
+                            <p data-zh="Yingzhou Ji: Immortal Ledger - 创新型全链Web3游戏，将传统游戏玩法与区块链技术深度融合。" data-en="Yingzhou Ji: Immortal Ledger - An innovative fully on-chain Web3 game that deeply integrates traditional gameplay with blockchain technology.">Yingzhou Ji: Immortal Ledger - 创新型全链Web3游戏，将传统游戏玩法与区块链技术深度融合。</p>
+                            <p><a href="https://github.com/24373054/Web3-games" target="_blank" class="project-link" data-zh="🔗 项目地址 →" data-en="🔗 Repository →">🔗 项目地址 →</a></p>
                             <div class="tech-stack">
                                 <span class="tech-tag">Solidity</span>
                                 <span class="tech-tag">NFT</span>
@@ -403,172 +847,189 @@
                                 <span class="tech-tag">AI-NPC</span>
                                 <span class="tech-tag">Babylon</span>
                             </div>
-                            <p>Yingzhou Ji: Immortal Ledger - 创新型全链Web3游戏，将传统游戏玩法与区块链技术深度融合。</p>
-                            <p><strong>核心技术：</strong>NFT智能合约开发、ZKML零知识机器学习、DAO治理机制、AI-NPC交互系统、Babylon协议集成</p>
-                            <p><strong>创新点：</strong>AI驱动的动态NPC系统，完全去中心化的游戏逻辑，链上资产所有权，玩家驱动的DAO治理</p>
-                            <p><strong>亮点：</strong>实现了游戏资产的真正所有权，创新的ZKML技术保护玩家隐私的同时验证游戏逻辑</p>
+                            <p><strong data-zh="核心技术：" data-en="Core Technologies: ">核心技术：</strong><span data-zh="NFT智能合约开发、ZKML零知识机器学习、DAO治理机制、AI-NPC交互系统、Babylon协议集成" data-en="NFT Smart Contract Development, ZKML Zero-Knowledge Machine Learning, DAO Governance, AI-NPC Systems, Babylon Protocol Integration">NFT智能合约开发、ZKML零知识机器学习、DAO治理机制、AI-NPC交互系统、Babylon协议集成</span></p>
+                            <p><strong data-zh="亮点：" data-en="Highlights: ">亮点：</strong><span data-zh="实现了游戏资产的真正所有权，创新的ZKML技术保护玩家隐私的同时验证游戏逻辑" data-en="True ownership of in-game assets, innovative ZKML technology protecting player privacy while verifying game logic">实现了游戏资产的真正所有权，创新的ZKML技术保护玩家隐私的同时验证游戏逻辑</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="稳定币交易所平台" data-en="Stablecoin Exchange Platform">稳定币交易所平台</h3>
+                            <small data-zh="2025.10 - 至今" data-en="Oct 2025 - Present">2025.10 - 至今</small>
+                        </div>
                         <div class="project-info">
-                            <h3>稳定币交易所平台 (2025.10-至今)</h3>
+                            <p data-zh="基于区块链的去中心化稳定币交易平台，集成智能风险检测与AI交易辅助系统。" data-en="A blockchain-based decentralized stablecoin trading platform with intelligent risk detection and AI trading assistant systems.">基于区块链的去中心化稳定币交易平台，集成智能风险检测与AI交易辅助系统。</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">EIP712</span>
                                 <span class="tech-tag">ERC20</span>
                                 <span class="tech-tag">Solidity</span>
                                 <span class="tech-tag">RAG</span>
-                                <span class="tech-tag">AI模型微调</span>
+                                <span class="tech-tag" data-zh="AI微调" data-en="AI Fine-tuning">AI微调</span>
                             </div>
-                            <p>基于区块链的去中心化稳定币交易平台，集成智能风险检测与AI交易辅助系统。</p>
-                            <p><strong>技术架构：</strong>EIP712类型化签名验证、ERC20代币标准实现、智能合约代币发行与管理、流动性池设计与实现</p>
-                            <p><strong>AI功能：</strong>RAG检索增强生成技术、大模型微调优化交易建议、提示工程实现智能客服、因子分析预测市场趋势</p>
-                            <p><strong>安全特性：</strong>多层级钱包交易安全验证、实时风险检测系统、异常交易智能拦截</p>
-                            <p><strong>亮点：</strong>创新的AI与区块链结合方案，高效的流动性管理机制，用户友好的交易体验</p>
+                            <p><strong data-zh="技术架构：" data-en="Architecture: ">技术架构：</strong><span data-zh="EIP712类型化签名验证、ERC20代币标准实现、智能合约代币发行与管理、流动性池设计" data-en="EIP712 Typed Signature Verification, ERC20 Token Standard, Smart Contract Token Issuance, Liquidity Pool Design">EIP712类型化签名验证、ERC20代币标准实现、智能合约代币发行与管理、流动性池设计</span></p>
+                            <p><strong data-zh="AI功能：" data-en="AI Features: ">AI功能：</strong><span data-zh="RAG检索增强生成技术、大模型微调优化交易建议、提示工程实现智能客服、因子分析预测市场趋势" data-en="RAG Technology, LLM Fine-tuning for Trading Advice, Prompt Engineering for Customer Service, Factor Analysis for Market Prediction">RAG检索增强生成技术、大模型微调优化交易建议、提示工程实现智能客服、因子分析预测市场趋势</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="AI量化策略交易系统" data-en="AI Quantitative Trading System">AI量化策略交易系统</h3>
+                            <small data-zh="2025.10 - 至今" data-en="Oct 2025 - Present">2025.10 - 至今</small>
+                        </div>
                         <div class="project-info">
-                            <h3>AI量化策略交易系统 (2025.10-至今)</h3>
+                            <p data-zh="智能化加密货币量化交易系统，集成策略开发、回测验证、情绪分析等功能。" data-en="An intelligent cryptocurrency quantitative trading system integrating strategy development, backtesting, and sentiment analysis.">智能化加密货币量化交易系统，集成策略开发、回测验证、情绪分析等功能。</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">Python</span>
-                                <span class="tech-tag">量化交易</span>
-                                <span class="tech-tag">机器学习</span>
-                                <span class="tech-tag">情绪分析</span>
+                                <span class="tech-tag" data-zh="量化交易" data-en="Quant Trading">量化交易</span>
+                                <span class="tech-tag" data-zh="机器学习" data-en="ML">机器学习</span>
+                                <span class="tech-tag" data-zh="情绪分析" data-en="Sentiment Analysis">情绪分析</span>
                             </div>
-                            <p>智能化加密货币量化交易系统，集成策略开发、回测验证、情绪分析等功能。</p>
-                            <p><strong>核心模块：</strong>多策略迭代开发框架、高性能回测引擎、市场情绪分析系统、风险管理模块</p>
-                            <p><strong>技术特点：</strong>机器学习驱动的因子分析、实时市场数据处理、自动化策略优化、多维度风险评估</p>
-                            <p><strong>创新点：</strong>结合社交媒体情绪分析提高预测准确度、自适应策略参数调优</p>
-                            <p><strong>亮点：</strong>完整的量化交易工作流，从策略开发到实盘交易的全流程支持</p>
+                            <p><strong data-zh="核心模块：" data-en="Core Modules: ">核心模块：</strong><span data-zh="多策略迭代开发框架、高性能回测引擎、市场情绪分析系统、风险管理模块" data-en="Multi-strategy Development Framework, High-performance Backtesting Engine, Market Sentiment Analysis System, Risk Management Module">多策略迭代开发框架、高性能回测引擎、市场情绪分析系统、风险管理模块</span></p>
+                            <p><strong data-zh="创新点：" data-en="Innovations: ">创新点：</strong><span data-zh="结合社交媒体情绪分析提高预测准确度、自适应策略参数调优" data-en="Social media sentiment analysis for improved prediction accuracy, adaptive strategy parameter optimization">结合社交媒体情绪分析提高预测准确度、自适应策略参数调优</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="Web3点数游戏平台" data-en="Web3 Gaming Platform">Web3点数游戏平台</h3>
+                            <small data-zh="2025.10 - 至今" data-en="Oct 2025 - Present">2025.10 - 至今</small>
+                        </div>
                         <div class="project-info">
-                            <h3>Web3点数游戏平台 (2025.10-至今)</h3>
+                            <p data-zh="创新型Web3休闲游戏平台，支持加密钱包与传统支付双通道。" data-en="An innovative Web3 casual gaming platform supporting both crypto wallets and traditional payment methods.">创新型Web3休闲游戏平台，支持加密钱包与传统支付双通道。</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">Web3.js</span>
-                                <span class="tech-tag">智能合约</span>
-                                <span class="tech-tag">钱包集成</span>
-                                <span class="tech-tag">微信支付</span>
+                                <span class="tech-tag" data-zh="智能合约" data-en="Smart Contract">智能合约</span>
+                                <span class="tech-tag" data-zh="微信支付" data-en="WeChat Pay">微信支付</span>
                             </div>
-                            <p>创新型Web3休闲游戏平台，支持加密钱包与传统支付双通道。</p>
-                            <p><strong>支付系统：</strong>MetaMask等Web3钱包集成、微信支付API对接、多币种支付支持、自动汇率转换</p>
-                            <p><strong>游戏机制：</strong>链上积分系统、公平透明的随机数生成、实时结算与提现</p>
-                            <p><strong>亮点：</strong>打通Web2与Web3支付生态，降低用户进入门槛，保证游戏公平性</p>
+                            <p><strong data-zh="支付系统：" data-en="Payment System: ">支付系统：</strong><span data-zh="MetaMask等Web3钱包集成、微信支付API对接、多币种支付支持" data-en="MetaMask & Web3 Wallet Integration, WeChat Pay API, Multi-currency Support">MetaMask等Web3钱包集成、微信支付API对接、多币种支付支持</span></p>
+                            <p><strong data-zh="亮点：" data-en="Highlights: ">亮点：</strong><span data-zh="打通Web2与Web3支付生态，降低用户进入门槛" data-en="Bridging Web2 and Web3 payment ecosystems, lowering user entry barriers">打通Web2与Web3支付生态，降低用户进入门槛</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="Matrix Lab 实验室网站" data-en="Matrix Lab Website">Matrix Lab 实验室网站</h3>
+                            <small data-zh="2025.9" data-en="Sep 2025">2025.9</small>
+                        </div>
                         <div class="project-info">
-                            <h3>Matrix Lab 实验室网站 (2025.9)</h3>
+                            <p data-zh="Matrix Lab区块链与联邦学习研究实验室官方网站开发与部署。" data-en="Development and deployment of the official website for Matrix Lab, a blockchain and federated learning research laboratory.">Matrix Lab区块链与联邦学习研究实验室官方网站开发与部署。</p>
+                            <p><a href="https://matrixlab.work/" target="_blank" class="project-link" data-zh="🔗 访问网站 →" data-en="🔗 Visit Website →">🔗 访问网站 →</a></p>
                             <div class="tech-stack">
                                 <span class="tech-tag">Jekyll</span>
                                 <span class="tech-tag">GitHub Pages</span>
-                                <span class="tech-tag">响应式设计</span>
+                                <span class="tech-tag" data-zh="响应式设计" data-en="Responsive Design">响应式设计</span>
                             </div>
-                            <p>Matrix Lab区块链与联邦学习研究实验室官方网站开发与部署。</p>
-                            <p><strong>网站地址：</strong><a href="https://matrixlab.work/" target="_blank">https://matrixlab.work/</a></p>
-                            <p><strong>技术实现：</strong>Jekyll静态站点生成、GitHub Pages自动化部署、响应式设计适配多端、LibDoc主题定制</p>
-                            <p><strong>功能模块：</strong>实验室介绍、研究成果展示、团队成员管理、学术出版物列表</p>
-                            <p><strong>亮点：</strong>简洁专业的学术风格设计，优秀的SEO优化，快速的页面加载速度</p>
+                            <p><strong data-zh="技术实现：" data-en="Implementation: ">技术实现：</strong><span data-zh="Jekyll静态站点生成、GitHub Pages自动化部署、响应式设计适配多端" data-en="Jekyll Static Site Generation, GitHub Pages Automated Deployment, Responsive Design">Jekyll静态站点生成、GitHub Pages自动化部署、响应式设计适配多端</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="区块链加密货币交易所" data-en="Blockchain Cryptocurrency Exchange">区块链加密货币交易所</h3>
+                            <small data-zh="2025.9 - 至今" data-en="Sep 2025 - Present">2025.9 - 至今</small>
+                        </div>
                         <div class="project-info">
-                            <h3>区块链加密货币交易所 (2025.9-至今)</h3>
+                            <p data-zh="基于区块链技术的加密货币交易平台，集成钱包功能和AI市场分析。" data-en="A blockchain-based cryptocurrency trading platform with integrated wallet functionality and AI market analysis.">基于区块链技术的加密货币交易平台，集成钱包功能和AI市场分析。</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">区块链</span>
-                                <span class="tech-tag">API集成</span>
-                                <span class="tech-tag">AI技术</span>
+                                <span class="tech-tag" data-zh="区块链" data-en="Blockchain">区块链</span>
+                                <span class="tech-tag" data-zh="AI技术" data-en="AI Technology">AI技术</span>
                             </div>
-                            <p>基于区块链技术的加密货币交易平台，集成钱包功能和AI市场分析。</p>
-                            <p><strong>功能：</strong>API集成多种加密货币，智能钱包系统，AI市场预测</p>
-                            <p><strong>亮点：</strong>创新的AI辅助交易功能，高安全性设计</p>
+                            <p><strong data-zh="功能：" data-en="Features: ">功能：</strong><span data-zh="API集成多种加密货币，智能钱包系统，AI市场预测" data-en="Multi-cryptocurrency API Integration, Smart Wallet System, AI Market Prediction">API集成多种加密货币，智能钱包系统，AI市场预测</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="加密云盘" data-en="Encrypted Cloud Storage">加密云盘</h3>
+                            <small data-zh="2025.6 - 2025.8" data-en="Jun - Aug 2025">2025.6 - 2025.8</small>
+                        </div>
                         <div class="project-info">
-                            <h3>加密云盘 (2025.6-2025.8)</h3>
+                            <p data-zh="安全可靠的云存储解决方案，提供端到端加密保护用户文件隐私。" data-en="A secure and reliable cloud storage solution providing end-to-end encryption to protect user file privacy.">安全可靠的云存储解决方案，提供端到端加密保护用户文件隐私。</p>
                             <div class="tech-stack">
-                                <span class="tech-tag">加密技术</span>
-                                <span class="tech-tag">云存储</span>
+                                <span class="tech-tag" data-zh="加密技术" data-en="Encryption">加密技术</span>
+                                <span class="tech-tag" data-zh="云存储" data-en="Cloud Storage">云存储</span>
                             </div>
-                            <p>安全可靠的云存储解决方案，提供端到端加密保护用户文件隐私。</p>
-                            <p><strong>特点：</strong>高强度加密算法，简洁的文件管理界面</p>
+                            <p><strong data-zh="特点：" data-en="Features: ">特点：</strong><span data-zh="高强度加密算法，简洁的文件管理界面" data-en="High-strength Encryption Algorithm, Clean File Management Interface">高强度加密算法，简洁的文件管理界面</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="邮件发送系统桌面软件" data-en="Email Management Desktop Software">邮件发送系统桌面软件</h3>
+                            <small data-zh="2025.5 - 2025.7" data-en="May - Jul 2025">2025.5 - 2025.7</small>
+                        </div>
                         <div class="project-info">
-                            <h3>邮件发送系统桌面软件 (2025.5-2025.7)</h3>
+                            <p data-zh="智能化邮件管理软件，支持群发、定时发送和邮件模板管理。" data-en="Intelligent email management software supporting bulk sending, scheduled sending, and email template management.">智能化邮件管理软件，支持群发、定时发送和邮件模板管理。</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">Python</span>
-                                <span class="tech-tag">数据库</span>
-                                <span class="tech-tag">EXE打包</span>
+                                <span class="tech-tag" data-zh="数据库" data-en="Database">数据库</span>
+                                <span class="tech-tag" data-zh="EXE打包" data-en="EXE Packaging">EXE打包</span>
                             </div>
-                            <p>智能化邮件管理软件，支持群发、定时发送和邮件模板管理。</p>
-                            <p><strong>功能：</strong>数据库管理，智能化发送策略，EXE打包分发</p>
-                            <p><strong>亮点：</strong>提高邮件营销效率，易于部署使用</p>
+                            <p><strong data-zh="功能：" data-en="Features: ">功能：</strong><span data-zh="数据库管理，智能化发送策略，EXE打包分发" data-en="Database Management, Intelligent Sending Strategy, EXE Packaging Distribution">数据库管理，智能化发送策略，EXE打包分发</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="购物网站" data-en="E-commerce Website">购物网站</h3>
+                            <small data-zh="2025.2 - 2025.3" data-en="Feb - Mar 2025">2025.2 - 2025.3</small>
+                        </div>
                         <div class="project-info">
-                            <h3>购物网站 (2025.2-2025.3)</h3>
+                            <p data-zh="全功能电子商务平台，集成支付系统，提供完整的购物体验。" data-en="A full-featured e-commerce platform with integrated payment system providing a complete shopping experience.">全功能电子商务平台，集成支付系统，提供完整的购物体验。</p>
                             <div class="tech-stack">
-                                <span class="tech-tag">前端技术</span>
-                                <span class="tech-tag">支付集成</span>
+                                <span class="tech-tag" data-zh="前端技术" data-en="Frontend">前端技术</span>
+                                <span class="tech-tag" data-zh="支付集成" data-en="Payment Integration">支付集成</span>
                             </div>
-                            <p>全功能电子商务平台，集成支付系统，提供完整的购物体验。</p>
-                            <p><strong>特点：</strong>安全的支付处理，用户友好的购物流程</p>
+                            <p><strong data-zh="特点：" data-en="Features: ">特点：</strong><span data-zh="安全的支付处理，用户友好的购物流程" data-en="Secure Payment Processing, User-friendly Shopping Flow">安全的支付处理，用户友好的购物流程</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="树洞网站" data-en="Anonymous Social Platform">树洞网站</h3>
+                            <small data-zh="2024.12 - 2025.2" data-en="Dec 2024 - Feb 2025">2024.12 - 2025.2</small>
+                        </div>
                         <div class="project-info">
-                            <h3>树洞网站 (2024.12-2025.2)</h3>
+                            <p data-zh="匿名社交平台，用户可发帖、评论、加好友和实时聊天。" data-en="An anonymous social platform where users can post, comment, add friends, and chat in real-time.">匿名社交平台，用户可发帖、评论、加好友和实时聊天。</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">Flask</span>
                                 <span class="tech-tag">SQL</span>
                                 <span class="tech-tag">JavaScript</span>
                             </div>
-                            <p>匿名社交平台，用户可发帖、评论、加好友和实时聊天。</p>
-                            <p><strong>功能：</strong>SQL数据库管理，实时聊天系统，好友关系管理</p>
-                            <p><strong>亮点：</strong>注重用户隐私保护，简洁易用的界面设计</p>
+                            <p><strong data-zh="功能：" data-en="Features: ">功能：</strong><span data-zh="SQL数据库管理，实时聊天系统，好友关系管理" data-en="SQL Database Management, Real-time Chat System, Friend Relationship Management">SQL数据库管理，实时聊天系统，好友关系管理</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="论文图片生成AI助手" data-en="AI Paper Figure Generation Assistant">论文图片生成AI助手</h3>
+                            <small data-zh="2024.11 - 2025.1" data-en="Nov 2024 - Jan 2025">2024.11 - 2025.1</small>
+                        </div>
                         <div class="project-info">
-                            <h3>论文图片生成AI助手 (2024.11-2025.1)</h3>
+                            <p data-zh="基于AI技术的论文图表生成工具，帮助研究人员快速创建专业图表。" data-en="An AI-powered paper chart generation tool helping researchers quickly create professional charts.">基于AI技术的论文图表生成工具，帮助研究人员快速创建专业图表。</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">Flask</span>
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">AI API</span>
                             </div>
-                            <p>基于AI技术的论文图表生成工具，帮助研究人员快速创建专业图表。</p>
-                            <p><strong>技术：</strong>调用DS的API实现智能图表生成</p>
-                            <p><strong>亮点：</strong>简化科研工作流程，提高图表制作效率</p>
+                            <p><strong data-zh="技术：" data-en="Technology: ">技术：</strong><span data-zh="调用DS的API实现智能图表生成" data-en="Intelligent Chart Generation via DS API">调用DS的API实现智能图表生成</span></p>
                         </div>
                     </div>
                     
                     <div class="project-card">
+                        <div class="project-header">
+                            <h3 data-zh="校史馆展示平台" data-en="University History Museum Platform">校史馆展示平台</h3>
+                            <small data-zh="2024.9 - 2024.12" data-en="Sep - Dec 2024">2024.9 - 2024.12</small>
+                        </div>
                         <div class="project-info">
-                            <h3>校史馆展示平台 (2024.9-2024.12)</h3>
+                            <p data-zh="为学校设计的校史馆在线展示平台，提供虚拟游览和历史资料查询功能。" data-en="An online display platform for the university history museum, providing virtual tours and historical information query functions.">为学校设计的校史馆在线展示平台，提供虚拟游览和历史资料查询功能。</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">HTML/CSS</span>
                                 <span class="tech-tag">JavaScript</span>
                                 <span class="tech-tag">React</span>
                             </div>
-                            <p>为学校设计的校史馆在线展示平台，提供虚拟游览和历史资料查询功能。</p>
-                            <p><strong>成果：</strong>获得走进软件课程优秀奖</p>
-                            <p><strong>亮点：</strong>交互式时间轴设计，响应式布局适配多设备</p>
+                            <p><strong data-zh="成果：" data-en="Achievement: ">成果：</strong><span data-zh="获得走进软件课程优秀奖" data-en="Received Excellence Award in Software Introduction Course">获得走进软件课程优秀奖</span></p>
                         </div>
                     </div>
                 </div>
@@ -578,15 +1039,22 @@
         <!-- 联系 -->
         <section id="contact" class="contact">
             <div class="container">
-                <h2>联系我</h2>
+                <div class="section-title">
+                    <h2 data-zh="联系我" data-en="Contact Me">联系我</h2>
+                    <p class="subtitle" data-zh="Get In Touch" data-en="Get In Touch">Get In Touch</p>
+                </div>
                 <div class="contact-methods">
                     <div class="contact-card">
-                        <h3>邮箱</h3>
-                        <p>2315766973@qq.com</p>
+                        <h3 data-zh="📧 邮箱" data-en="📧 Email">📧 邮箱</h3>
+                        <p><a href="mailto:2315766973@qq.com">2315766973@qq.com</a></p>
                     </div>
                     <div class="contact-card">
-                        <h3>电话</h3>
+                        <h3 data-zh="📱 电话" data-en="📱 Phone">📱 电话</h3>
                         <p>19971403020</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>🔗 GitHub</h3>
+                        <p><a href="https://github.com/24373054" target="_blank">@24373054</a></p>
                     </div>
                 </div>
             </div>
@@ -596,8 +1064,148 @@
     <!-- 页脚 -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 杨卓. 保留所有权利。</p>
+            <p data-zh="© 2025 杨卓 Yang Zhuo. 保留所有权利。" data-en="© 2025 Yang Zhuo. All Rights Reserved.">© 2025 杨卓 Yang Zhuo. 保留所有权利。</p>
+            <p class="beian-info">
+                <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802046489" rel="noreferrer" target="_blank" class="beian-link">
+                    <img src="图片/备案图标.png" alt="备案图标" class="beian-icon">
+                    京公网安备11010802046489号
+                </a>
+            </p>
         </div>
     </footer>
+
+    <script>
+        // 语言切换功能
+        const langToggle = document.getElementById('langToggle');
+        const langText = document.getElementById('langText');
+        let currentLang = localStorage.getItem('language') || 'zh';
+        
+        // 初始化语言
+        function initLanguage() {
+            if (currentLang === 'en') {
+                langText.textContent = '中文';
+                switchToEnglish();
+            } else {
+                langText.textContent = 'EN';
+                switchToChinese();
+            }
+        }
+        
+        // 切换到英文
+        function switchToEnglish() {
+            document.querySelectorAll('[data-zh][data-en]').forEach(element => {
+                element.textContent = element.getAttribute('data-en');
+            });
+            document.documentElement.lang = 'en';
+            document.title = 'Yang Zhuo - Academic Portfolio';
+        }
+        
+        // 切换到中文
+        function switchToChinese() {
+            document.querySelectorAll('[data-zh][data-en]').forEach(element => {
+                element.textContent = element.getAttribute('data-zh');
+            });
+            document.documentElement.lang = 'zh-CN';
+            document.title = '杨卓 - 个人学术主页';
+        }
+        
+        // 语言切换事件
+        langToggle.addEventListener('click', () => {
+            if (currentLang === 'zh') {
+                currentLang = 'en';
+                langText.textContent = '中文';
+                switchToEnglish();
+            } else {
+                currentLang = 'zh';
+                langText.textContent = 'EN';
+                switchToChinese();
+            }
+            localStorage.setItem('language', currentLang);
+        });
+        
+        // 初始化语言
+        initLanguage();
+        
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        const body = document.body;
+        
+        // 从localStorage获取保存的主题
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // 初始化主题
+        function initTheme() {
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                body.classList.add('dark-theme');
+                body.classList.remove('light-theme');
+                sunIcon.classList.remove('active');
+                moonIcon.classList.add('active');
+            } else {
+                body.classList.add('light-theme');
+                body.classList.remove('dark-theme');
+                sunIcon.classList.add('active');
+                moonIcon.classList.remove('active');
+            }
+        }
+        
+        // 切换主题
+        function toggleTheme() {
+            if (body.classList.contains('dark-theme')) {
+                // 切换到亮色
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                sunIcon.classList.add('active');
+                moonIcon.classList.remove('active');
+                localStorage.setItem('theme', 'light');
+            } else {
+                // 切换到暗色
+                body.classList.add('dark-theme');
+                body.classList.remove('light-theme');
+                sunIcon.classList.remove('active');
+                moonIcon.classList.add('active');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        
+        // 初始化
+        initTheme();
+        
+        // 绑定点击事件
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // 监听系统主题变化
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                initTheme();
+            }
+        });
+        
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
